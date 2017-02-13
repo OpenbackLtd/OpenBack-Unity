@@ -4,6 +4,7 @@
 
 - [Introduction](#introduction)
 - [Unity Integration](#unity-integration)
+- [OpenBack Library API](#openback-library-api)
 
 <!-- /MarkdownTOC -->
 
@@ -76,6 +77,64 @@ For now, some manual steps are now required:
 
 Follow the steps from the [iOS Integration Guide][ios-embedded].
 
+## OpenBack Library API
+
+These endpoints are used for your app to interact directly with OpenBack.
+
+### Getting the library version
+
+```cs
+OpenBack openBack = OpenBack.SharedInstance;
+string version = openBack.getSdkVersion ();
+```
+### Setting Custom Trigger values
+
+```cs
+OpenBack openBack = OpenBack.SharedInstance;
+openBack.setCustomTrigger (OpenBackTrigger.CustomTrigger1, "Hello");
+openBack.setCustomTrigger (OpenBackTrigger.CustomTrigger2, 42);
+openBack.setCustomTrigger (OpenBackTrigger.CustomTrigger3, 1.2345);
+```
+
+_OpenBack typically supports up to 10 custom values, if you need more please discuss with OpenBack or email integrations@openback.com_
+
+### User Information
+
+The application can pass some extra user information using the `OpenBackUserInfo` srtuct by setting the following fields:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `AddressLine1` | String | Address line 1 |
+| `AddressLine2` | String | Address line 2 |
+| `AdvertisingId` | String | Advertising identifier set by the application |
+| `Age` | String | Age |
+| `City` | String | City |
+| `Country` | String | Country |
+| `CountryCode` | String | ISO-2 country code |
+| `DateOfBirth` | String | Date of birth _YYYY-MM-DD_ |
+| `Email` | String | Email Address |
+| `FirstName` | String | First name |
+| `Gender` | String | Gender |
+| `OptInUpdates` | String | Opting in for campaign updates _"true"/"false"_ |
+| `PhoneNumber` | String | Phone Number (international format) |
+| `PostCode` | String | Postal code |
+| `Profession` | String | Profession |
+| `State` | String | State |
+| `Surname` | String | Surname |
+| `Title` | String | Title |
+| `Identity1` | String | Custom user identifier 1 |
+| `Identity2` | String | Custom user identifier 2 |
+| `Identity3` | String | Custom user identifier 3 |
+| `Identity4` | String | Custom user identifier 4 |
+| `Identity5` | String | Custom user identifier 5 |
+
+```cs
+OpenBack openBack = OpenBack.SharedInstance;
+OpenBackUserInfo userInfo = new OpenBackUserInfo ();
+userInfo.Email = "info@openback.com";
+userInfo.FirstName = "nicolas";
+openBack.setUserInfo (userInfo);
+```
 
 [android-init]: https://gist.github.com/npabion/14d5420ec9b13d36d610262f3a3dc632#initializing-the-openback-library
 [ios-init]: https://gist.github.com/npabion/9aa26ed1c4297819609a6d9a88c986a8#using-the-openback-library
