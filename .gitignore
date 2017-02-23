@@ -1,2 +1,5 @@
 
 *.DS_Store
+Unity/Plugins/Android/*.jar
+Unity/Plugins/Android/*.aar
+Unity/Plugins/iOS/*.framework
