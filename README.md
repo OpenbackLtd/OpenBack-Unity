@@ -40,10 +40,9 @@ OpenBack is a fast and easy integration for Unity apps and should take less than
 
 ## Unity Integration
 
-Download [`OpenBack.unitypackage`](OpenBack.unitypackage) from this repository. Open and import the files in your project.
+Download [`OpenBack.unitypackage`](OpenBack.unitypackage) from this repository. Open and import the files in your project. 
 
 ### Android Configuration
-
 
 Open and edit the provided `StreamingAssets/openback.json` file with your `appCode`. You can also configure the material notification icon for Android 5+. Please refer to the [Android documentation][android-init].
 
@@ -61,7 +60,11 @@ Open and edit the provided `StreamingAssets/openback.json` file with your `appCo
 
 - **Bootstrapping**
 
-	We provide a package [`OpenBackUnity.unitypackage`](OpenBackUnity.unitypackage) to help bootstrap OpenBack properly on Unity. In a regular Android application, Openback is normally initialized during the `onCreate()` call of your application class. This extra package simply adds a manifest that sets the `android:name` attribute to use `com.openback.unity.UnityApplication`. 
+	We provide a package [`OpenBackUnity.unitypackage`](OpenBackUnity.unitypackage) to help bootstrap OpenBack on Unity. In a regular Android application, Openback is normally initialized during the `onCreate()` call of your application class. This extra package simply adds a manifest that sets the `android:name` attribute to use `com.openback.unity.UnityApplication`.
+
+	> We recommend using the `Gradle` build system as manifest merge works better. If you use the `Internal` build system, the manifest from `OpenBackUnity.aar` will likely not work, giving a warning. You will need to use a custom manifest and set the `android:name` attribute of the application tag.
+
+	If your application already uses a custom `Application` class, merge the code from [UnityApplication.java](Android/OpenBack-Android-Unity/src/main/java/com/openback/unity/UnityApplication.java) to initialize OpenBack.
 
 ### iOS Configuration
 
