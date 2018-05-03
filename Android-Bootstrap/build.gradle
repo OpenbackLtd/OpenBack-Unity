@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+    }
+
+    repositories {
+        jcenter()
+        google()
+    }
+}
+
+repositories {
+    jcenter()
+    google()
+    maven { url 'https://maven.openback.com/public' }
+}
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        minSdkVersion 14
+        versionCode 1
+        versionName "1.0.0"
+        archivesBaseName = "OpenBackBootstrap"
+        version = android.defaultConfig.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    libraryVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${archivesBaseName}-${version}-${variant.buildType.name}.aar"
+        }
+    }
+}
+
+dependencies {
+
+    api "com.openback:OpenBack:2.2.0"
+
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testImplementation 'junit:junit:4.12'
+}

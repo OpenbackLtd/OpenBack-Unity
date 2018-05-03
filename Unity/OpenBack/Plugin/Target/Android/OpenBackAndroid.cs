@@ -62,27 +62,27 @@ namespace OpenBackUnity {
 		}
 
 		public bool setCustomTrigger (OpenBackTrigger trigger, string value) {
-			openBack.CallStatic ("setCustomTrigger", context, (int)trigger, value);
+			openBack.CallStatic ("setCustomTrigger", context, (int)trigger + 1, value);
 			return true;
 		}
 
 		public bool setCustomTrigger (OpenBackTrigger trigger, int value) {
-			openBack.CallStatic ("setCustomTrigger", context, (int)trigger, value);
+			openBack.CallStatic ("setCustomTrigger", context, (int)trigger + 1, value);
 			return true;
 		}
 
 		public bool setCustomTrigger (OpenBackTrigger trigger, long value) {
-			openBack.CallStatic ("setCustomTrigger", context, (int)trigger, value);
+			openBack.CallStatic ("setCustomTrigger", context, (int)trigger + 1, value);
 			return true;
 		}
 
 		public bool setCustomTrigger (OpenBackTrigger trigger, float value) {
-			openBack.CallStatic ("setCustomTrigger", context, (int)trigger, value);
+			openBack.CallStatic ("setCustomTrigger", context, (int)trigger + 1, value);
 			return true;
 		}
 
 		public bool setCustomTrigger (OpenBackTrigger trigger, double value) {
-			openBack.CallStatic ("setCustomTrigger", context, (int)trigger, value);
+			openBack.CallStatic ("setCustomTrigger", context, (int)trigger + 1, value);
 			return true;
 		}
 	}

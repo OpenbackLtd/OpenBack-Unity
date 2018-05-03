@@ -59,31 +59,9 @@ extern "C" {
 
 @implementation OpenBackUnityAppController
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions {
-    
-    NSDictionary *config = @{
-        kOBKConfigAppCode: @"YOUR_APP_CODE_HERE",
-        // Core settings
-        kOBKConfigLogLevel: @(kOBKLogLevelNone),
-        // Enable options
-        kOBKConfigEnableAlertNotifications: @(YES),
-        kOBKConfigEnableInAppNotifications: @(YES),
-        kOBKConfigEnableRemoteNotifications: @(YES),
-        kOBKConfigEnableProximity: @(NO),
-        kOBKConfigEnableMotionCoprocessor: @(NO),
-        kOBKConfigEnableMicrophone: @(NO),
-        kOBKConfigEnableLocation: @(NO),
-        kOBKConfigEnableLocationWhenInUse: @(NO),
-        // Let OpenBack prompt for permissions
-        kOBKConfigRequestAlertNotificationsAuthorization: @(YES),
-        kOBKConfigRequestMotionCoprocessorAuthorization: @(YES),
-        kOBKConfigRequestMicrophoneAuthorization: @(YES),
-        kOBKConfigRequestLocationAlwaysAuthorization: @(YES),
-        kOBKConfigRequestLocationWhenInUseAuthorization: @(YES)
-    };
-    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions {    
     NSError *error = nil;
-    if ([OpenBack setupWithConfig:config error:&error]) {
+    if ([OpenBack setupWithConfig:@{ } error:&error]) {
         error = nil;
         if (![OpenBack start:&error]) {
             NSLog(@"Unable to start OpenBack: %@", error);
