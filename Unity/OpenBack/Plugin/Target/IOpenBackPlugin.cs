@@ -11,6 +11,9 @@ namespace OpenBackUnity
 		bool setCustomTrigger (OpenBackTrigger trigger, float value);
 		bool setCustomTrigger (OpenBackTrigger trigger, double value);
 
+		bool gdprForgetUser (bool forgetUser);
+		bool logGoal (string goal, int step, double value);
+
 		string getSdkVersion ();
 	}
 }

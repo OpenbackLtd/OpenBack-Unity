@@ -85,6 +85,15 @@ namespace OpenBackUnity {
 			openBack.CallStatic ("setCustomTrigger", context, (int)trigger + 1, value);
 			return true;
 		}
+
+		public bool gdprForgetUser (bool forgetUser) {
+			openBack.CallStatic ("gdprForgetUser", context, forgetUser);
+			return true;
+		}
+
+		public bool logGoal (string goal, int step, double value) {
+			return openBack.CallStatic<bool> ("logGoal", context, goal, step, value);
+		}
 	}
 }
 

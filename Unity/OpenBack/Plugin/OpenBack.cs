@@ -91,6 +91,20 @@ namespace OpenBackUnity
 			}
 			return true;
 		}
+
+		public bool gdprForgetUser (bool forgetUser) {
+			if (!Application.isEditor) {
+				return plugin.gdprForgetUser (forgetUser);
+			}
+			return true;
+		}
+
+		public bool logGoal (string goal, int step, double value) {
+			if (!Application.isEditor) {
+				return plugin.logGoal (goal, step, value);
+			}
+			return true;
+		}
 	}
 }
 

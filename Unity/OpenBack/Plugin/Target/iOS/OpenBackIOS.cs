@@ -73,7 +73,6 @@ namespace OpenBackUnity {
 		[DllImport ("__Internal")]
 		private static extern bool _setFloatCustomTrigger(int trigger, float value);
 
-
 		public bool setCustomTrigger (OpenBackTrigger trigger, float value) {
 			return _setFloatCustomTrigger ((int)trigger, value);
 		}
@@ -83,6 +82,20 @@ namespace OpenBackUnity {
 
 		public bool setCustomTrigger (OpenBackTrigger trigger, double value) {
 			return _setDoubleCustomTrigger ((int)trigger, value);
+		}
+
+		[DllImport ("__Internal")]
+		private static extern bool _gdprForgetUser (bool forgetUser);
+
+		public bool gdprForgetUser (bool forgetUser) {
+			return _gdprForgetUser (forgetUser);
+		}
+
+		[DllImport ("__Internal")]
+		private static extern bool _logGoal (string goal, int step, double value);
+
+		public bool logGoal (string goal, int step, double value) {
+			return _logGoal (goal, step, value);
 		}
 	}
 }

@@ -51,6 +51,14 @@ extern "C" {
     bool _setDoubleCustomTrigger(int trigger, double value) {
         return [OpenBack setValue:@(value) forCustomTrigger:(OBKCustomTriggerType)trigger error:nil];
     }
+    
+    bool _gdprForgetUser(bool forgetUser) {
+        return [OpenBack gdprForgetUser:forgetUser error:nil];
+    }
+    
+    bool _logGoal(const char *goal, int step, double value) {
+        return [OpenBack logGoal:CreateNSString(goal) step:step value:value error:nil];
+    }
 }
 
 @interface OpenBackUnityAppController : UnityAppController
@@ -59,9 +67,9 @@ extern "C" {
 
 @implementation OpenBackUnityAppController
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions {
     NSError *error = nil;
-    if ([OpenBack setupWithConfig:@{ } error:&error]) {
+    if ([OpenBack setupWithConfig:@{} error:&error]) {
         error = nil;
         if (![OpenBack start:&error]) {
             NSLog(@"Unable to start OpenBack: %@", error);
