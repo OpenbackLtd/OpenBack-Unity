@@ -92,6 +92,13 @@ namespace OpenBackUnity {
 		}
 
 		[DllImport ("__Internal")]
+		private static extern void _coppaCompliant (bool compliant);
+
+		public void coppaCompliant (bool compliant) {
+			_coppaCompliant (compliant);
+		}
+
+		[DllImport ("__Internal")]
 		private static extern bool _logGoal (string goal, int step, double value);
 
 		public bool logGoal (string goal, int step, double value) {

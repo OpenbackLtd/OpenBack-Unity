@@ -92,6 +92,12 @@ namespace OpenBackUnity
 			return true;
 		}
 
+		public void coppaCompliant (bool compliant) {
+			if (!Application.isEditor) {
+				plugin.coppaCompliant (compliant);
+			}
+		}
+
 		public bool gdprForgetUser (bool forgetUser) {
 			if (!Application.isEditor) {
 				return plugin.gdprForgetUser (forgetUser);

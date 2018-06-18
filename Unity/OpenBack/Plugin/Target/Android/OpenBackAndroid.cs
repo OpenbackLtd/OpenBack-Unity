@@ -91,6 +91,10 @@ namespace OpenBackUnity {
 			return true;
 		}
 
+		public void coppaCompliant (bool compliant) {
+			openBack.CallStatic ("coppaCompliant", context, compliant);
+		}
+
 		public bool logGoal (string goal, int step, double value) {
 			return openBack.CallStatic<bool> ("logGoal", context, goal, step, value);
 		}

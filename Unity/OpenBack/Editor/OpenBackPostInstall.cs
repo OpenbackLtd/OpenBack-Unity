@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using System.Collections;
 using UnityEditor.iOS.Xcode;
+using UnityEditor.iOS.Xcode.Extensions;
 using System.IO;
 
 public class OpenBackPluginPostProcessBuild
@@ -67,13 +68,15 @@ public class OpenBackPluginPostProcessBuild
 		PlistElementDict rootDict = plist.root;
 
 		// Set the app code - REQUIRED
-		rootDict.SetString(kOBKConfigAppCode, "YOUR_APP_CODE_HERE"); 
+		rootDict.SetString(kOBKConfigAppCode, "YOUR_APP_CODE"); 
 		// Set the debug log level (useful to make sure everything is running fine)
 		rootDict.SetInteger(kOBKConfigLogLevel, (int)LogLevel.NONE);
 		// Set the background fetch interval - 0 means UIApplicationBackgroundFetchIntervalMinimum
 		rootDict.SetInteger(kOBKConfigMinimumBackgroundFetchInterval, 0);
         // Enable Alert Notifications - requires kOBKConfigRequestAlertNotificationsAuthorization (true is the default value)
 		rootDict.SetBoolean(kOBKConfigEnableAlertNotifications, true);
+		// Set the notification sound file
+//		rootDict.SetString(kOBKConfigNotificationSound, "file.caf");
 		// Enable Notifications and In App Messages when in the foreground (true is the default value)
         rootDict.SetBoolean(kOBKConfigEnableInAppNotifications, true);
 		// Enable remote push notifications (true is the default value)
@@ -115,14 +118,36 @@ public class OpenBackPluginPostProcessBuild
 		// Write PBXProject object back to the file
 		project.WriteToFile (projectPath);
 	}
+
+	static void CopyToEmbeddedBinaries (string pathToBuiltProject)
+	{
+		string projectPath = pathToBuiltProject + "/Unity-iPhone.xcodeproj/project.pbxproj";
+		PBXProject project = new PBXProject ();
+		project.ReadFromFile (projectPath);
+		// Xcode target in the generated project
+		string target = project.TargetGuidByName ("Unity-iPhone");
+		// Default plugins location
+		string openBackFramework = Path.Combine("Plugins/iOS", "OpenBack.framework");
+		string fileGuid = project.AddFile(openBackFramework, "Frameworks/" + openBackFramework, PBXSourceTree.Sdk);
+		// Add to embedded binaries
+		PBXProjectExtensions.AddFileToEmbedFrameworks(project, target, fileGuid);
+		project.SetBuildProperty(target, "LD_RUNPATH_SEARCH_PATHS", "$(inherited) @executable_path/Frameworks");
+		project.WriteToFile (projectPath);
+	}
 		
 	[PostProcessBuildAttribute(1)]
 	public static void OnPostprocessBuild(BuildTarget buildTarget, string pathToBuiltProject) 
 	{
 		if ( buildTarget == BuildTarget.iOS )
 		{
-			UpdateInfoPList (pathToBuiltProject);
+			// Generate the OpenBack.plist configuration file
 			CreateOpenBackConfig (pathToBuiltProject);
+
+			// If you are using egoXproject, and already set the project settings, comment out this line
+			UpdateInfoPList (pathToBuiltProject);
+
+			// If you are not using Cocoapods, you need to make sure OpenBack is in the Embed Binaries
+//			CopyToEmbeddedBinaries (pathToBuiltProject);
 		}
 	}
 }

@@ -52,6 +52,10 @@ extern "C" {
         return [OpenBack setValue:@(value) forCustomTrigger:(OBKCustomTriggerType)trigger error:nil];
     }
     
+    void _coppaCompliant(bool compliant) {
+        [OpenBack coppaCompliant:compliant];
+    }
+    
     bool _gdprForgetUser(bool forgetUser) {
         return [OpenBack gdprForgetUser:forgetUser error:nil];
     }
