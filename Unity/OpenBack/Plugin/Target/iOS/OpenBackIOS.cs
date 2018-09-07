@@ -104,6 +104,14 @@ namespace OpenBackUnity {
 		public bool logGoal (string goal, int step, double value) {
 			return _logGoal (goal, step, value);
 		}
+
+		[DllImport ("__Internal")]
+		private static extern void _changeAppCode (string appCode);
+
+		public void changeAppCode (string appCode) {
+			_changeAppCode (appCode);
+		}
+
 	}
 }
 

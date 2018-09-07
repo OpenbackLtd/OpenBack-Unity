@@ -7,21 +7,27 @@
         		<repository>https://repo1.maven.org/maven2</repository>
       		</repositories>
       	</androidPackage>
-      	<androidPackage spec="com.google.android.gms:play-services-gcm:11.8.0">
+
+      	<!--- Uncomment if you want to use GCM -->
+      	<!-- androidPackage spec="com.google.android.gms:play-services-gcm:11.8.0">
       		<repositories>
         		<repository>https://maven.google.com</repository>
       		</repositories>
-      	</androidPackage>
-      	<androidPackage spec="com.google.android.gms:play-services-location:11.8.0">
+      	</androidPackage -->
+
+      	<!--- Uncomment if you want to use location services -->
+      	<!-- androidPackage spec="com.google.android.gms:play-services-location:11.8.0">
       		<repositories>
         		<repository>https://maven.google.com</repository>
       		</repositories>
-      	</androidPackage>
-      	<androidPackage spec="com.google.firebase:firebase-messaging:11.8.0">
+      	</androidPackage -->
+
+      	<!--- Uncomment if you want to use Firebase -->
+      	<!-- androidPackage spec="com.google.firebase:firebase-messaging:11.8.0">
       		<repositories>
         		<repository>https://maven.google.com</repository>
       		</repositories>
-      	</androidPackage>
+      	</androidPackage -->
       	<androidPackage spec="com.android.support:appcompat-v7:27.1.1">
       		<repositories>
         		<repository>https://maven.google.com</repository>
@@ -45,11 +51,11 @@
   	</androidPackages>
 
   	<!-- iOS Cocoapod dependencies -->
-  	<iosPods>
+<!--  	<iosPods>
     	<iosPod name="OpenBack" bitcodeEnabled="true" minTargetSdk="8.0">
       		<sources>
         		<source>https://github.com/CocoaPods/Specs</source>
       		</sources>
     	</iosPod>
-  	</iosPods>
+  	</iosPods>-->
 </dependencies>

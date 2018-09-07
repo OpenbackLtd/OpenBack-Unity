@@ -21,6 +21,35 @@ extern "C" {
         return [NSString stringWithUTF8String:""];
     }
     
+    static void SavePref(NSString * pref, NSString * value) {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setObject:value forKey:pref];
+    }
+    
+    static NSString* GetPref(NSString * pref) {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        return (NSString *)[prefs objectForKey:pref];
+    }
+    
+    static void RemovePref(NSString * pref) {
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs removeObjectForKey:pref];
+    }
+    
+    static void StartOpenBack() {
+        NSError *error = nil;
+        NSString *appCode = GetPref(@"OPENBACK_UNITY_APPCODE");
+        NSDictionary *config = appCode.length ? @{ kOBKConfigAppCode: appCode } : @{};
+        if ([OpenBack setupWithConfig:config error:&error]) {
+            error = nil;
+            if (![OpenBack start:&error]) {
+                NSLog(@"Unable to start OpenBack: %@", error);
+            }
+        } else {
+            NSLog(@"OpenBack configuration error: %@", error);
+        }
+    }
+    
     const char* _getSdkVersion() {
         return cStringCopy((const char*)&OpenBackVersionString[0]);
     }
@@ -63,6 +92,17 @@ extern "C" {
     bool _logGoal(const char *goal, int step, double value) {
         return [OpenBack logGoal:CreateNSString(goal) step:step value:value error:nil];
     }
+    
+    void _changeAppCode(const char *appCode) {
+        [OpenBack stop:nil];
+        NSString *appCodeString = CreateNSString(appCode);
+        if (appCodeString.length) {
+            SavePref(@"OPENBACK_UNITY_APPCODE", appCodeString);
+        } else {
+            RemovePref(@"OPENBACK_UNITY_APPCODE");
+        }
+        StartOpenBack();
+    }
 }
 
 @interface OpenBackUnityAppController : UnityAppController
@@ -72,15 +112,7 @@ extern "C" {
 @implementation OpenBackUnityAppController
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions {
-    NSError *error = nil;
-    if ([OpenBack setupWithConfig:@{} error:&error]) {
-        error = nil;
-        if (![OpenBack start:&error]) {
-            NSLog(@"Unable to start OpenBack: %@", error);
-        }
-    } else {
-        NSLog(@"OpenBack configuration error: %@", error);
-    }
+    StartOpenBack();
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

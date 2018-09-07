@@ -111,6 +111,12 @@ namespace OpenBackUnity
 			}
 			return true;
 		}
+
+		public void changeAppCode (string appCode) {
+			if (!Application.isEditor) {
+				plugin.changeAppCode (appCode);
+			}
+		}
 	}
 }
 
