@@ -98,6 +98,15 @@ namespace OpenBackUnity {
 		public bool logGoal (string goal, int step, double value) {
 			return openBack.CallStatic<bool> ("logGoal", context, goal, step, value);
 		}
+
+		public void changeAppCode (string appCode) {
+			openBack.CallStatic ("stop", context);
+			AndroidJavaObject config = new AndroidJavaObject ("com.openback.OpenBack$Config", context);
+			if (appCode.Length > 0) {
+				config.Call<AndroidJavaObject> ("setOpenBackAppCode", appCode);
+			}
+			openBack.CallStatic ("start", config);
+		}
 	}
 }
 
