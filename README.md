@@ -12,7 +12,7 @@ There are 3 packages available:
 
 * [OpenBackWithResolver.unitypackage](OpenBackWithResolver.unitypackage)
 
-    This package contains the OpenBack plugin plus the Google resolver _(v1.2.65)_.
+    This package contains the OpenBack plugin + the Google resolver _(v1.2.65)_.
 
 * [OpenBackBootstrap.unitypackage](OpenBackBootstrap.unitypackage)
 
@@ -22,7 +22,7 @@ There are 3 packages available:
 
 This small project simply builds a library `OpenBackBootstrap.aar`. In a regular Android application, Openback is normally initialized during the onCreate() call of your application class. This extra package simply provides a manifest that sets the `android:name` attribute to `com.openback.unity.UnityApplication`. The application class simply starts OpenBack.
 
-It is recommended to the Gradle build system in your Unity project as the manifest merge works better.
+It is recommended to the Gradle build system in your Unity project for the manifest merge to work properly.
 
 If your application already uses a custom Application class, add some code to initialize OpenBack. Check the [Android documentation](https://docs.openback.com/android/integration).
 

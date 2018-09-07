@@ -51,11 +51,11 @@
   	</androidPackages>
 
   	<!-- iOS Cocoapod dependencies -->
-<!--  	<iosPods>
+  	<iosPods>
     	<iosPod name="OpenBack" bitcodeEnabled="true" minTargetSdk="8.0">
       		<sources>
         		<source>https://github.com/CocoaPods/Specs</source>
       		</sources>
     	</iosPod>
-  	</iosPods>-->
+  	</iosPods>
 </dependencies>
