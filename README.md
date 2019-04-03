@@ -12,7 +12,7 @@ There are 3 packages available:
 
 * [OpenBackWithResolver.unitypackage](OpenBackWithResolver.unitypackage)
 
-    This package contains the OpenBack plugin + the Google resolver _(v1.2.65)_.
+    This package contains the OpenBack plugin + the Google resolver _(v1.2.102)_.
 
 * [OpenBackBootstrap.unitypackage](OpenBackBootstrap.unitypackage)
 
