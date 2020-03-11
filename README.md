@@ -6,19 +6,19 @@ Check the full OpenBack Unity plugin documention [here](https://docs.openback.co
 
 There are 3 packages available:
 
-* [OpenBack.unitypackage](OpenBack.unitypackage)
+* [OpenBack.unitypackage](OpenBack.unitypackage?raw=true)
 
     This package contains the OpenBack plugin only.
 
-* [OpenBackWithResolver.unitypackage](OpenBackWithResolver.unitypackage)
+* [OpenBackWithResolver.unitypackage](OpenBackWithResolver.unitypackage?raw=true)
 
     This package contains the OpenBack plugin + the Google resolver _(v1.2.136)_.
 
-* [OpenBackBootstrap.unitypackage](OpenBackBootstrap.unitypackage)
+* [OpenBackBootstrap.unitypackage](OpenBackBootstrap.unitypackage?raw=true)
 
     This package contains the bootstrap library for Android for single dex application.
 
-* [OpenBackBootstrap-MultiDex.unitypackage](OpenBackBootstrap-MultiDex.unitypackage)
+* [OpenBackBootstrap-MultiDex.unitypackage](OpenBackBootstrap-MultiDex.unitypackage?raw=true)
 
     This package contains the bootstrap library for Android for multi dex application.
 
