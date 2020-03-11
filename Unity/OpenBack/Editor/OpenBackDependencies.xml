@@ -15,6 +15,13 @@
       		</repositories>
       	</androidPackage -->
 
+		<!--- Uncomment if you want to use multidex -->
+		<!-- <androidPackage spec="com.android.support:multidex:1.0.3">
+      		<repositories>
+        		<repository>https://maven.google.com</repository>
+      		</repositories>
+      	</androidPackage> -->
+	
       	<androidPackage spec="com.google.firebase:firebase-messaging:17.5.0">
       		<repositories>
         		<repository>https://maven.google.com</repository>
@@ -45,7 +52,7 @@
                 <repository>https://maven.google.com</repository>
             </repositories>
         </androidPackage>
-    	<androidPackage spec="com.openback:OpenBack:2.+">
+    	<androidPackage spec="com.openback:OpenBack:3.+">
     		<repositories>
         		<repository>https://maven.openback.com/public</repository>
       		</repositories>
