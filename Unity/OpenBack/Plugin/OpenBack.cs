@@ -85,9 +85,18 @@ namespace OpenBackUnity
 			return true;
 		}
 
+		public bool setCustomTrigger(OpenBackTrigger trigger, long value)
+		{
+			if (!Application.isEditor)
+			{
+				return plugin.setCustomTrigger(trigger, value);
+			}
+			return true;
+		}
+
 		public bool setCustomTrigger (OpenBackTrigger trigger, float value) {
 			if (!Application.isEditor) {
-				return plugin.setCustomTrigger (trigger, value);
+                return plugin.setCustomTrigger(trigger, value);
 			}
 			return true;
 		}
