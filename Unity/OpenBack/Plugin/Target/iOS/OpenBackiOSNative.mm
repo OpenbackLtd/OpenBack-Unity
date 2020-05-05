@@ -92,6 +92,14 @@ extern "C" {
     bool _logGoal(const char *goal, int step, double value) {
         return [OpenBack logGoal:CreateNSString(goal) step:step value:value error:nil];
     }
+
+    void _triggerEvent(const char *eventName, long delay) {
+        [OpenBack triggerEvent:CreateNSString(eventName) withDelay:delay];
+    }
+
+    void _cancelEvent(const char *eventName) {
+        [OpenBack cancelEvent:CreateNSString(eventName)];
+    }
     
     void _changeAppCode(const char *appCode) {
         [OpenBack stop:nil];

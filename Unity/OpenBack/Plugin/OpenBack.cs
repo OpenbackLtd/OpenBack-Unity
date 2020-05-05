@@ -121,6 +121,22 @@ namespace OpenBackUnity
 			return true;
 		}
 
+        public void triggerEvent (string eventName, long delay)
+        {
+            if (!Application.isEditor)
+            {
+				plugin.triggerEvent(eventName, delay);
+            }
+        }
+
+        public void cancelEvent(string eventName)
+        {
+            if (!Application.isEditor)
+            {
+				plugin.cancelEvent(eventName);
+            }
+        }
+
 		public void changeAppCode (string appCode) {
 			if (!Application.isEditor) {
 				plugin.changeAppCode (appCode);

@@ -99,6 +99,14 @@ namespace OpenBackUnity {
 			return openBack.CallStatic<bool> ("logGoal", context, goal, step, value);
 		}
 
+        public void triggerEvent (string eventName, long delay) {
+			openBack.CallStatic ("triggerEvent", context, eventName, delay);
+		}
+
+        public void cancelEvent (string eventName) {
+			openBack.CallStatic ("cancelEvent", context, eventName);
+		}
+
 		public void changeAppCode (string appCode) {
 			openBack.CallStatic ("stop", context);
 			AndroidJavaObject config = new AndroidJavaObject ("com.openback.OpenBack$Config", context);

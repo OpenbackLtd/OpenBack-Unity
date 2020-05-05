@@ -15,6 +15,9 @@ namespace OpenBackUnity
 		bool gdprForgetUser (bool forgetUser);
 		bool logGoal (string goal, int step, double value);
 
+        void triggerEvent(string eventName, long delay);
+		void cancelEvent(string eventName);
+
 		void changeAppCode (string appCode);
 
 		string getSdkVersion ();

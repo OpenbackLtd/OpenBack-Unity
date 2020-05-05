@@ -105,6 +105,22 @@ namespace OpenBackUnity {
 			return _logGoal (goal, step, value);
 		}
 
+		[DllImport("__Internal")]
+		private static extern void _triggerEvent(string eventName, long delay);
+
+		public void triggerEvent(string eventName, long delay)
+		{
+			_triggerEvent(eventName, delay);
+		}
+
+		[DllImport("__Internal")]
+		private static extern void _cancelEvent(string eventName);
+
+		public void cancelEvent(string eventName)
+		{
+			_cancelEvent(eventName);
+		}
+
 		[DllImport ("__Internal")]
 		private static extern void _changeAppCode (string appCode);
 
