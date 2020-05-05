@@ -10,10 +10,6 @@ There are 3 packages available:
 
     This package contains the OpenBack plugin only.
 
-* [OpenBackWithResolver.unitypackage](OpenBackWithResolver.unitypackage?raw=true)
-
-    This package contains the OpenBack plugin + the Google resolver _(v1.2.153)_.
-
 * [OpenBackBootstrap.unitypackage](OpenBackBootstrap.unitypackage?raw=true)
 
     This package contains the bootstrap library for Android for single dex application.
@@ -23,6 +19,8 @@ There are 3 packages available:
     This package contains the bootstrap library for Android for multi dex application.
 
 > When using multi-dex, make sure to add it to your dependencies (see [OpenBackDependencies.xml](Unity/OpenBack/Editor/OpenBackDependencies.xml))
+
+The Google Unity resolver can be downloaded here: https://github.com/googlesamples/unity-jar-resolver
 
 ## Android Bootstrap
 
