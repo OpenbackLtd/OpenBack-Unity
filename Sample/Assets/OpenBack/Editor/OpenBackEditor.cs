@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
-using System;
 
 namespace OpenBack.Editor
 {
     public class OBKConfigEditor : EditorWindow
     {
-        private OBKConfig config;
+        private OpenBackConfig config;
 
         private Vector2 scrollPos;
         private bool showIOSAdvanced = false;
@@ -34,7 +34,8 @@ namespace OpenBack.Editor
 
         void OnEnable()
         {
-            config = new OBKConfig();
+            config = OpenBackConfig.Load();
+            config.Apply();
         }
 
         void OnGUI()
@@ -45,17 +46,17 @@ namespace OpenBack.Editor
             // IOS Section
             GUILayout.Label("iOS Settings", EditorStyles.boldLabel);            
             EditorGUI.indentLevel++;
-            config.IOSAppCode = EditorGUILayout.TextField(new GUIContent("App Code", "Enter the OpenBack app code"), config.IOSAppCode);
-            config.IOSAppGroup = EditorGUILayout.TextField("App Group", config.IOSAppGroup);
-            config.IOSLogLevel = (OBKConfig.LogLevel)EditorGUILayout.EnumPopup("Log Level", config.IOSLogLevel);
+            config.IOSAppCode = EditorGUILayout.TextField(new GUIContent("App Code", "Enter your iOS OpenBack app code."), config.IOSAppCode);
+            config.IOSAppGroup = EditorGUILayout.TextField(new GUIContent("App Group", "The app group used for OpenBack and app extenstions (e.g. group.com.domain.app)."), config.IOSAppGroup);
+            config.IOSLogLevel = (OpenBackConfig.LogLevel)EditorGUILayout.EnumPopup(new GUIContent("Log Level", "The debug log level."), config.IOSLogLevel);
             // Notification
             showIOSNotification = EditorGUILayout.Foldout(showIOSNotification, "Notification");
             if (showIOSNotification)
             {
                 EditorGUI.indentLevel++;
-                config.IOSClearBadgeCount = EditorGUILayout.Toggle("Clear Badge Count", config.IOSClearBadgeCount);
-                config.IOSNotificationLargeIcon = EditorGUILayout.TextField("Large Icon", config.IOSNotificationLargeIcon);
-                config.IOSNotificationSound = EditorGUILayout.TextField("Sound", config.IOSNotificationSound);
+                config.IOSClearBadgeCount = EditorGUILayout.Toggle(new GUIContent("Clear Badge Count", "Controls if OpenBack clears the badge number when app is opened (only if badge is enabled)."), config.IOSClearBadgeCount);
+                config.IOSNotificationLargeIcon = EditorGUILayout.TextField(new GUIContent("Large Icon", "Default large icon for notification (filename in main bundle or image asset name)."), config.IOSNotificationLargeIcon);
+                config.IOSNotificationSound = EditorGUILayout.TextField(new GUIContent("Sound", "Set the default notification sound (filename in main bundle)."), config.IOSNotificationSound);
                 EditorGUI.indentLevel--;
             }
             // Advanced
@@ -63,11 +64,11 @@ namespace OpenBack.Editor
             if (showIOSAdvanced)
             {
                 EditorGUI.indentLevel++;
-                config.IOSEnableAutoStart = EditorGUILayout.Toggle("Enable Auto-Start", config.IOSEnableAutoStart);
-                config.IOSEnableCoreMotion = EditorGUILayout.Toggle("Enable Core Motion", config.IOSEnableCoreMotion);
-                config.IOSEnableMicrophone = EditorGUILayout.Toggle("Enable Microphone", config.IOSEnableMicrophone);
-                config.IOSEnableProximity = EditorGUILayout.Toggle("Enable Proximity", config.IOSEnableProximity);
-                config.IOSEnableSwizzle = EditorGUILayout.Toggle("Enable Swizzle", config.IOSEnableSwizzle);
+                config.IOSEnableAutoStart = EditorGUILayout.Toggle(new GUIContent("Auto-Start", "Controls if OpenBack starts automatically."), config.IOSEnableAutoStart);
+                config.IOSEnableCoreMotion = EditorGUILayout.Toggle(new GUIContent("Enable Core Motion", "Controls if library can use Core Motion Activity manager."), config.IOSEnableCoreMotion);
+                config.IOSEnableMicrophone = EditorGUILayout.Toggle(new GUIContent("Enable Microphone", "Controls if OpenBack can use the microphone."), config.IOSEnableMicrophone);
+                config.IOSEnableProximity = EditorGUILayout.Toggle(new GUIContent("Enable Proximity", "Controls if OpenBack can use the proximity sensor."), config.IOSEnableProximity);
+                config.IOSEnableSwizzle = EditorGUILayout.Toggle(new GUIContent("Use Swizzling", "Controls if swizzling is enabled. If you disable swizzling, you must hook some delegate calls to OpenBack manually (see docs)."), config.IOSEnableSwizzle);
                 EditorGUI.indentLevel--;
             }
             EditorGUI.indentLevel--;
@@ -76,19 +77,19 @@ namespace OpenBack.Editor
             // Android Section
             GUILayout.Label("Android Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            config.AndroidAppCode = EditorGUILayout.TextField(new GUIContent("App Code", "Enter the OpenBack app code"), config.AndroidAppCode);
-            config.AndroidLogLevel = (OBKConfig.LogLevel)EditorGUILayout.EnumPopup("Log Level", config.AndroidLogLevel);
+            config.AndroidAppCode = EditorGUILayout.TextField(new GUIContent("App Code", "Enter your Android OpenBack app code."), config.AndroidAppCode);
+            config.AndroidLogLevel = (OpenBackConfig.LogLevel)EditorGUILayout.EnumPopup(new GUIContent("Log Level", "The debug log level."), config.AndroidLogLevel);
             // Notification
             showAndroidNotification = EditorGUILayout.Foldout(showAndroidNotification, "Notification");
             if (showAndroidNotification)
             {
                 EditorGUI.indentLevel++;
-                config.AndroidNotificationIcon = EditorGUILayout.TextField("Icon", config.AndroidNotificationIcon);
-                config.AndroidNotificationAccent = EditorGUILayout.TextField("Color Accent", config.AndroidNotificationAccent);
-                config.AndroidNotificationLargeIcon = EditorGUILayout.TextField("Large Icon", config.AndroidNotificationLargeIcon);
-                config.AndroidNotificationSound = EditorGUILayout.TextField("Sound", config.AndroidNotificationSound);
-                config.AndroidNotificationChannel = EditorGUILayout.TextField("Channel", config.AndroidNotificationChannel);
-                config.AndroidNotificationChannelDescription = EditorGUILayout.TextField("Channel Description", config.AndroidNotificationChannelDescription);
+                config.AndroidNotificationIcon = EditorGUILayout.TextField(new GUIContent("Icon", "The resource ID for the notification icon (e.g. @drawable/xxx)."), config.AndroidNotificationIcon);
+                config.AndroidNotificationAccent = EditorGUILayout.TextField(new GUIContent("Color Accent", "The resource ID for the notification color accent (e.g. @color/xxx)."), config.AndroidNotificationAccent);
+                config.AndroidNotificationLargeIcon = EditorGUILayout.TextField(new GUIContent("Large Icon", "The resource ID for the notification large icon (e.g. @drawable/xxx)."), config.AndroidNotificationLargeIcon);
+                config.AndroidNotificationSound = EditorGUILayout.TextField(new GUIContent("Sound", "The resource ID for the notification sound in res/raw (e.g. @raw/xxx)."), config.AndroidNotificationSound);
+                config.AndroidNotificationChannel = EditorGUILayout.TextField(new GUIContent("Channel", "The string name of the default notification channel (e.g. @string/xxx or direct value)."), config.AndroidNotificationChannel);
+                config.AndroidNotificationChannelDescription = EditorGUILayout.TextField(new GUIContent("Channel Description", "The string description of the default notification channel (e.g. @string/xxx or direct value)"), config.AndroidNotificationChannelDescription);
                 EditorGUI.indentLevel--;
             }
             // Advanced
@@ -96,24 +97,21 @@ namespace OpenBack.Editor
             if (showAndroidAdvanced)
             {
                 EditorGUI.indentLevel++;
-                config.AndroidEnableAutoStart = EditorGUILayout.Toggle("Enable Auto-Start", config.AndroidEnableAutoStart);
+                config.AndroidEnableAutoStart = EditorGUILayout.Toggle(new GUIContent("Auto-Start", "Controls if OpenBack starts automatically."), config.AndroidEnableAutoStart);
                 EditorGUI.indentLevel--;
             }
             EditorGUI.indentLevel--;
+            GUILayout.Space(20);
+
+            // Save Button
+            if (GUILayout.Button("Save")) {
+                config.Save();
+                config.Apply();                
+            }
 
             EditorGUILayout.EndScrollView();
             GUILayout.EndVertical();
-        }
-
-        private void CreateSection(string sectionTitle, Action body)
-        {
-            GUILayout.Label(sectionTitle, EditorStyles.boldLabel);
-            GUILayout.BeginVertical();
-            EditorGUI.indentLevel++;
-            body();
-            EditorGUI.indentLevel--;
-            GUILayout.EndVertical();
-            GUILayout.Space(20);
-        }
+        }        
     }
 }
+#endif
